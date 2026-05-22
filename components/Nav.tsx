@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -8,8 +9,8 @@ export default function Nav() {
     <nav className="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="text-xl font-bold tracking-tight text-slate-900">
-          Disha<span className="text-accent">.</span>
+        <a href="#" className="flex items-center">
+          <Image src="/disha-logo.png" alt="Disha" width={100} height={36} priority />
         </a>
 
         {/* Desktop links */}
