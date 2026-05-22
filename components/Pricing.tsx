@@ -1,3 +1,6 @@
+"use client";
+import { useState } from "react";
+
 const tiers = [
   {
     name: "Starter",
@@ -11,7 +14,7 @@ const tiers = [
       "Email delivery",
     ],
     cta: "Request a demo",
-    featured: false,
+    defaultSelected: false,
   },
   {
     name: "Growth",
@@ -26,7 +29,7 @@ const tiers = [
       "Owner walkthrough mode",
     ],
     cta: "Request a demo",
-    featured: true,
+    defaultSelected: true,
   },
   {
     name: "Multi-Location",
@@ -40,11 +43,13 @@ const tiers = [
       "Full POS data integration",
     ],
     cta: "Request a demo",
-    featured: false,
+    defaultSelected: false,
   },
 ];
 
 export default function Pricing() {
+  const [selected, setSelected] = useState(1); // Growth selected by default
+
   return (
     <section id="pricing" className="py-20 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
@@ -60,52 +65,65 @@ export default function Pricing() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-10">
-          {tiers.map((tier) => (
-            <div
-              key={tier.name}
-              className={`rounded-2xl border p-7 flex flex-col ${
-                tier.featured
-                  ? "border-accent bg-blue-50 shadow-lg shadow-blue-100"
-                  : "border-slate-100 bg-white shadow-sm"
-              }`}
-            >
-              {tier.featured && (
-                <div className="text-xs font-bold uppercase tracking-widest text-accent mb-4">
-                  Most popular
-                </div>
-              )}
-              <div className="mb-4">
-                <div className="text-lg font-bold text-slate-900">{tier.name}</div>
-                <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-4xl font-extrabold text-slate-900">{tier.price}</span>
-                  <span className="text-sm text-slate-400">{tier.period}</span>
-                </div>
-                <p className="text-sm text-slate-500 mt-2 leading-relaxed">{tier.description}</p>
-              </div>
-
-              <ul className="flex-1 space-y-2 mb-6">
-                {tier.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-slate-600">
-                    <svg className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href="#demo"
-                className={`block text-center px-4 py-3 rounded-xl font-semibold text-sm transition-colors ${
-                  tier.featured
-                    ? "bg-accent text-white hover:bg-accent-dark"
-                    : "border border-slate-200 text-slate-700 hover:bg-slate-50"
+          {tiers.map((tier, i) => {
+            const isSelected = selected === i;
+            return (
+              <div
+                key={tier.name}
+                onClick={() => setSelected(i)}
+                className={`rounded-2xl border p-7 flex flex-col cursor-pointer transition-all duration-200 ${
+                  isSelected
+                    ? "border-accent bg-blue-50 shadow-lg shadow-blue-100 scale-[1.02]"
+                    : "border-slate-100 bg-white shadow-sm hover:border-slate-300 hover:shadow-md"
                 }`}
               >
-                {tier.cta}
-              </a>
-            </div>
-          ))}
+                <div className={`text-xs font-bold uppercase tracking-widest mb-4 transition-opacity duration-200 ${
+                  isSelected ? "text-accent opacity-100" : "opacity-0 select-none"
+                }`}>
+                  Selected
+                </div>
+
+                <div className="mb-4">
+                  <div className="text-lg font-bold text-slate-900">{tier.name}</div>
+                  <div className="flex items-baseline gap-1 mt-1">
+                    <span className="text-4xl font-extrabold text-slate-900">{tier.price}</span>
+                    <span className="text-sm text-slate-400">{tier.period}</span>
+                  </div>
+                  <p className="text-sm text-slate-500 mt-2 leading-relaxed">{tier.description}</p>
+                </div>
+
+                <ul className="flex-1 space-y-2 mb-6">
+                  {tier.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-slate-600">
+                      <svg
+                        className={`w-4 h-4 flex-shrink-0 mt-0.5 transition-colors duration-200 ${
+                          isSelected ? "text-accent" : "text-slate-400"
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <a
+                  href="#demo"
+                  onClick={(e) => e.stopPropagation()}
+                  className={`block text-center px-4 py-3 rounded-xl font-semibold text-sm transition-colors ${
+                    isSelected
+                      ? "bg-accent text-white hover:bg-accent-dark"
+                      : "border border-slate-200 text-slate-700 hover:bg-slate-50"
+                  }`}
+                >
+                  {tier.cta}
+                </a>
+              </div>
+            );
+          })}
         </div>
 
         {/* Implementation note */}
