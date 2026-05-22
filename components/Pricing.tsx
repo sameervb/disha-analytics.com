@@ -77,12 +77,6 @@ export default function Pricing() {
                     : "border-slate-100 bg-white shadow-sm hover:border-slate-300 hover:shadow-md"
                 }`}
               >
-                <div className={`text-xs font-bold uppercase tracking-widest mb-4 transition-opacity duration-200 ${
-                  isSelected ? "text-accent opacity-100" : "opacity-0 select-none"
-                }`}>
-                  Selected
-                </div>
-
                 <div className="mb-4">
                   <div className="text-lg font-bold text-slate-900">{tier.name}</div>
                   <div className="flex items-baseline gap-1 mt-1">
