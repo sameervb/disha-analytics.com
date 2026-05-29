@@ -40,7 +40,7 @@ const tiers = [
       "Up to 3 locations",
       "Cross-location comparison",
       "Market share analysis",
-      "Full POS data integration",
+      "POS data integration",
     ],
     cta: "Request a demo",
     defaultSelected: false,
@@ -59,8 +59,8 @@ export default function Pricing() {
             Pays for itself in month one.
           </h2>
           <p className="text-lg text-slate-500 max-w-xl mx-auto">
-            The average Growth plan client recovers €1,000–1,500 in margin from the
-            first action alone. The subscription costs €129.
+            Pilot findings suggest €1,000–2,000 in recoverable margin identified from a single
+            report. The Growth plan costs €129 a month.
           </p>
         </div>
 
@@ -105,7 +105,7 @@ export default function Pricing() {
                 </ul>
 
                 <a
-                  href="#demo"
+                  href="#contact"
                   onClick={(e) => e.stopPropagation()}
                   className={`block text-center px-4 py-3 rounded-xl font-semibold text-sm transition-colors ${
                     isSelected
@@ -133,7 +133,7 @@ export default function Pricing() {
             </p>
           </div>
           <a
-            href="#demo"
+            href="#contact"
             className="flex-shrink-0 px-4 py-2.5 rounded-xl bg-emerald-700 text-white text-sm font-semibold hover:bg-emerald-800 transition-colors"
           >
             Ask about grants

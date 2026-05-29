@@ -2,7 +2,7 @@ const steps = [
   {
     number: "01",
     title: "Submit your restaurant",
-    body: "Enter your restaurant name and city. No account needed to request a demo — we handle the setup.",
+    body: "Enter your restaurant name and city. That's all the input required — Disha handles the research from there.",
   },
   {
     number: "02",

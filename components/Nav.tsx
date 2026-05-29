@@ -24,10 +24,10 @@ export default function Nav() {
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="#demo"
+            href="#contact"
             className="px-4 py-2 rounded-lg bg-accent text-white text-sm font-semibold hover:bg-accent-dark transition-colors"
           >
-            Request a demo
+            Get in touch
           </a>
         </div>
 
@@ -57,11 +57,11 @@ export default function Nav() {
           <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
           <a href="#institutions" onClick={() => setMenuOpen(false)}>For institutions</a>
           <a
-            href="#demo"
+            href="#contact"
             onClick={() => setMenuOpen(false)}
             className="mt-2 px-4 py-2 rounded-lg bg-accent text-white text-center font-semibold"
           >
-            Request a demo
+            Get in touch
           </a>
         </div>
       )}
