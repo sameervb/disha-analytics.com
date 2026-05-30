@@ -4,6 +4,7 @@ import ProductIntro from "@/components/ProductIntro";
 import Problem from "@/components/Problem";
 import HowItWorks from "@/components/HowItWorks";
 import Capabilities from "@/components/Capabilities";
+import PilotFinding from "@/components/PilotFinding";
 import Pricing from "@/components/Pricing";
 import DemoCTA from "@/components/DemoCTA";
 import Footer from "@/components/Footer";
@@ -18,6 +19,7 @@ export default function Home() {
         <Problem />
         <HowItWorks />
         <Capabilities />
+        <PilotFinding />
         <Pricing />
         <DemoCTA />
       </main>
