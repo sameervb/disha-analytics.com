@@ -1,3 +1,5 @@
+'use client'
+import { useState } from 'react'
 import { CheckCircle2, AlertCircle, Info, HelpCircle, ShieldCheck } from 'lucide-react'
 
 const claims = [
@@ -5,9 +7,8 @@ const claims = [
     id: 'CMP-014',
     badge: 'OBSERVED',
     color: 'text-emerald-700 bg-emerald-50 border-emerald-200',
-    dot: 'bg-emerald-500',
     icon: CheckCircle2,
-    iconColor: 'text-emerald-600',
+    iconColor: 'text-emerald-500',
     text: 'Nearest competitor reduced lunch entrée pricing by €3.50 on 14 Mar. Menu updated on TheFork.',
     source: 'TheFork · 14 Mar 2026',
   },
@@ -15,9 +16,8 @@ const claims = [
     id: 'REV-031',
     badge: 'ESTIMATED',
     color: 'text-amber-700 bg-amber-50 border-amber-200',
-    dot: 'bg-amber-500',
     icon: AlertCircle,
-    iconColor: 'text-amber-600',
+    iconColor: 'text-amber-500',
     text: '22% of delivery reviews on Wolt mention cold food. Pattern skews Fri–Sun evenings. Estimated −0.4 stars impact on ranking.',
     source: 'Wolt · 847 reviews · 90-day window',
   },
@@ -25,9 +25,8 @@ const claims = [
     id: 'MNU-007',
     badge: 'INFERRED',
     color: 'text-blue-700 bg-blue-50 border-blue-200',
-    dot: 'bg-blue-500',
     icon: Info,
-    iconColor: 'text-blue-600',
+    iconColor: 'text-blue-400',
     text: 'Main courses priced €3.20 below market median for French cuisine in Luxembourg City. Bottom quartile.',
     source: 'Competitor menu scrape · 8 restaurants',
   },
@@ -35,9 +34,8 @@ const claims = [
     id: 'FIN-002',
     badge: 'HYPOTHESIS',
     color: 'text-red-700 bg-red-50 border-red-200',
-    dot: 'bg-red-500',
     icon: HelpCircle,
-    iconColor: 'text-red-600',
+    iconColor: 'text-red-400',
     text: 'Delivery revenue suppression estimated at €800–1,400/month based on Wolt ranking drop correlated with review patterns.',
     source: 'Synthesised · requires POS validation',
   },
@@ -71,26 +69,46 @@ const actions = [
 ]
 
 export default function ProductMockup() {
+  const [tab, setTab] = useState<'internal' | 'owner'>('internal')
+
   return (
     <div className="w-full rounded-2xl overflow-hidden border border-slate-200 shadow-xl shadow-slate-200/40 bg-white">
       {/* Tab bar */}
       <div className="flex items-center gap-0 border-b border-slate-200 bg-slate-50">
-        <div className="flex items-center gap-2 px-4 py-2.5 border-r border-slate-200 bg-white border-b-2 border-b-accent">
-          <div className="w-2 h-2 rounded-full bg-accent" />
-          <span className="text-xs font-semibold text-accent">Internal report</span>
-        </div>
-        <div className="flex items-center gap-2 px-4 py-2.5 border-r border-slate-200">
-          <div className="w-2 h-2 rounded-full bg-slate-300" />
-          <span className="text-xs font-semibold text-slate-400">Owner walkthrough</span>
-        </div>
+        <button
+          onClick={() => setTab('internal')}
+          className={`flex items-center gap-2 px-4 py-2.5 border-r border-slate-200 text-left transition-colors ${
+            tab === 'internal'
+              ? 'bg-white border-b-2 border-b-accent'
+              : 'hover:bg-slate-100'
+          }`}
+        >
+          <div className={`w-2 h-2 rounded-full ${tab === 'internal' ? 'bg-accent' : 'bg-slate-300'}`} />
+          <span className={`text-xs font-semibold ${tab === 'internal' ? 'text-accent' : 'text-slate-400'}`}>
+            Internal report
+          </span>
+        </button>
+        <button
+          onClick={() => setTab('owner')}
+          className={`flex items-center gap-2 px-4 py-2.5 border-r border-slate-200 text-left transition-colors ${
+            tab === 'owner'
+              ? 'bg-white border-b-2 border-b-accent'
+              : 'hover:bg-slate-100'
+          }`}
+        >
+          <div className={`w-2 h-2 rounded-full ${tab === 'owner' ? 'bg-accent' : 'bg-slate-300'}`} />
+          <span className={`text-xs font-semibold ${tab === 'owner' ? 'text-accent' : 'text-slate-400'}`}>
+            Owner walkthrough
+          </span>
+        </button>
         <div className="ml-auto flex items-center gap-2 px-4">
           <ShieldCheck size={12} strokeWidth={2} className="text-emerald-500" />
-          <span className="text-[10px] text-slate-400">4 validated · 3 inferred · 1 hypothesis</span>
+          <span className="text-[10px] text-slate-400 hidden sm:block">4 validated · 3 inferred · 1 hypothesis</span>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
-        {/* Left — Internal analyst view */}
+      {/* Internal report view */}
+      {tab === 'internal' && (
         <div className="p-5 bg-slate-950 space-y-3">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -123,8 +141,10 @@ export default function ProductMockup() {
             })}
           </div>
         </div>
+      )}
 
-        {/* Right — Owner view */}
+      {/* Owner walkthrough view */}
+      {tab === 'owner' && (
         <div className="p-5 bg-white">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -138,7 +158,9 @@ export default function ProductMockup() {
             {actions.map((a) => (
               <div key={a.rank} className="rounded-xl border border-slate-100 p-4 hover:border-slate-200 transition-colors">
                 <div className="flex items-start gap-3">
-                  <div className="text-2xl font-bold text-slate-100 tabular-nums leading-none mt-0.5">{a.rank}</div>
+                  <div className="text-2xl font-bold text-slate-100 tabular-nums leading-none mt-0.5 flex-shrink-0">
+                    {a.rank}
+                  </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                       <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded ${a.impactColor}`}>
@@ -161,7 +183,7 @@ export default function ProductMockup() {
             </p>
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
