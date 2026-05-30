@@ -2,21 +2,21 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Disha — Restaurant Intelligence Platform",
+  title: "Disha: Restaurant Intelligence Platform",
   description:
-    "AI-powered business intelligence for independent restaurants. Analyse margins, pricing gaps, and competitive position in under 5 minutes.",
+    "AI-powered business intelligence for independent restaurants. Analyze margins, pricing gaps, and competitive position in under 5 minutes.",
   openGraph: {
-    title: "Disha — Restaurant Intelligence Platform",
+    title: "Disha: Restaurant Intelligence Platform",
     description:
-      "AI-powered business intelligence for independent restaurants. Analyse margins, pricing gaps, and competitive position in under 5 minutes.",
+      "AI-powered business intelligence for independent restaurants. Analyze margins, pricing gaps, and competitive position in under 5 minutes.",
     url: "https://disha-analytics.com",
     siteName: "Disha",
-    locale: "en_EU",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Disha — Restaurant Intelligence Platform",
+    title: "Disha: Restaurant Intelligence Platform",
     description:
       "AI-powered business intelligence for independent restaurants. In under 5 minutes.",
   },
