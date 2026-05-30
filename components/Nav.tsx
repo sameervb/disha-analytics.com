@@ -1,9 +1,12 @@
-"use client";
-import { useState } from "react";
-import Image from "next/image";
+'use client'
+import { useState } from 'react'
+import Image from 'next/image'
+import { useLanguage } from '@/lib/LanguageContext'
+import LanguageSelector from '@/components/ui/LanguageSelector'
 
 export default function Nav() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useLanguage()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <nav className="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
@@ -15,19 +18,20 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-          <a href="#how-it-works" className="hover:text-slate-900 transition-colors">How it works</a>
-          <a href="#capabilities" className="hover:text-slate-900 transition-colors">What you get</a>
-          <a href="#pricing" className="hover:text-slate-900 transition-colors">Pricing</a>
-          <a href="#institutions" className="hover:text-slate-900 transition-colors">For institutions</a>
+          <a href="#how-it-works" className="hover:text-slate-900 transition-colors">{t.nav.howItWorks}</a>
+          <a href="#capabilities" className="hover:text-slate-900 transition-colors">{t.nav.whatYouGet}</a>
+          <a href="#pricing" className="hover:text-slate-900 transition-colors">{t.nav.pricing}</a>
+          <a href="#contact" className="hover:text-slate-900 transition-colors">{t.nav.contact}</a>
         </div>
 
-        {/* CTA */}
+        {/* CTA + Language selector */}
         <div className="hidden md:flex items-center gap-3">
+          <LanguageSelector />
           <a
             href="#contact"
             className="px-4 py-2 rounded-lg bg-accent text-white text-sm font-semibold hover:bg-accent-dark transition-colors"
           >
-            Get in touch
+            {t.nav.cta}
           </a>
         </div>
 
@@ -52,19 +56,22 @@ export default function Nav() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden border-t border-slate-100 bg-white px-6 py-4 flex flex-col gap-4 text-sm font-medium text-slate-600">
-          <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How it works</a>
-          <a href="#capabilities" onClick={() => setMenuOpen(false)}>What you get</a>
-          <a href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-          <a href="#institutions" onClick={() => setMenuOpen(false)}>For institutions</a>
-          <a
-            href="#contact"
-            onClick={() => setMenuOpen(false)}
-            className="mt-2 px-4 py-2 rounded-lg bg-accent text-white text-center font-semibold"
-          >
-            Get in touch
-          </a>
+          <a href="#how-it-works" onClick={() => setMenuOpen(false)}>{t.nav.howItWorks}</a>
+          <a href="#capabilities" onClick={() => setMenuOpen(false)}>{t.nav.whatYouGet}</a>
+          <a href="#pricing" onClick={() => setMenuOpen(false)}>{t.nav.pricing}</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)}>{t.nav.contact}</a>
+          <div className="flex items-center justify-between mt-1">
+            <LanguageSelector />
+            <a
+              href="#contact"
+              onClick={() => setMenuOpen(false)}
+              className="px-4 py-2 rounded-lg bg-accent text-white text-center font-semibold"
+            >
+              {t.nav.cta}
+            </a>
+          </div>
         </div>
       )}
     </nav>
-  );
+  )
 }

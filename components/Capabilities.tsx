@@ -1,53 +1,33 @@
-import { Star, Receipt, Target, TrendingUp, ListOrdered, FlaskConical } from "lucide-react";
-
-const capabilities = [
-  {
-    Icon: Star,
-    title: "Review intelligence",
-    body: "Sentiment patterns, recurring complaints, peak period analysis, and service quality signals across all major platforms.",
-  },
-  {
-    Icon: Receipt,
-    title: "Menu and pricing analysis",
-    body: "Food cost estimates, pricing gaps relative to competitors, margin risk by dish category, and upsell opportunities.",
-  },
-  {
-    Icon: Target,
-    title: "Competitor benchmarking",
-    body: "Your 8 nearest competitors mapped by price tier, cuisine, rating, and volume, with clear positioning gaps identified.",
-  },
-  {
-    Icon: TrendingUp,
-    title: "Financial hypothesis",
-    body: "Where the money is likely going. Structural profit drivers and loss patterns surfaced from public signals, ready to validate against your own data.",
-  },
-  {
-    Icon: ListOrdered,
-    title: "Ranked action list",
-    body: "Every finding converts into a concrete action, ranked by estimated impact. No raw data dumps. Just what to do next.",
-  },
-  {
-    Icon: FlaskConical,
-    title: "30-day experiments",
-    body: "Low-risk, testable changes you can run in-house without a consultant. Each with a clear hypothesis and success metric.",
-  },
-];
+'use client'
+import { MessageSquare, Target, Receipt, TrendingUp, ListOrdered, FlaskConical } from 'lucide-react'
+import { useLanguage } from '@/lib/LanguageContext'
 
 export default function Capabilities() {
+  const { t } = useLanguage()
+
+  const capabilities = [
+    { Icon: MessageSquare, title: t.capabilities.cap1title, body: t.capabilities.cap1body },
+    { Icon: Target,        title: t.capabilities.cap2title, body: t.capabilities.cap2body },
+    { Icon: Receipt,       title: t.capabilities.cap3title, body: t.capabilities.cap3body },
+    { Icon: TrendingUp,    title: t.capabilities.cap4title, body: t.capabilities.cap4body },
+    { Icon: ListOrdered,   title: t.capabilities.cap5title, body: t.capabilities.cap5body },
+    { Icon: FlaskConical,  title: t.capabilities.cap6title, body: t.capabilities.cap6body },
+  ]
+
   return (
-    <section id="capabilities" className="py-20 px-6 bg-slate-50">
+    <section id="capabilities" className="py-20 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <div className="mb-14">
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3">
-            What&apos;s in the report
+            {t.capabilities.label}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
-            Six dimensions. One report.
-            <br />All actionable.
+            {t.capabilities.headline1}
+            <br />
+            {t.capabilities.headline2}
           </h2>
           <p className="text-lg text-slate-500 max-w-xl leading-relaxed">
-            Every section of the Disha report is designed to produce a decision,
-            not just an observation.
+            {t.capabilities.subheadline}
           </p>
         </div>
 
@@ -55,7 +35,7 @@ export default function Capabilities() {
           {capabilities.map((c) => (
             <div
               key={c.title}
-              className="bg-white rounded-2xl border border-slate-100 p-6 hover:border-slate-200 transition-colors"
+              className="bg-slate-50 rounded-2xl border border-slate-100 p-6 hover:border-slate-200 transition-colors"
             >
               <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center mb-4">
                 <c.Icon size={20} strokeWidth={1.5} className="text-accent" />
@@ -67,5 +47,5 @@ export default function Capabilities() {
         </div>
       </div>
     </section>
-  );
+  )
 }

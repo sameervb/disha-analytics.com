@@ -1,19 +1,21 @@
-import { Phone, Mail } from "lucide-react";
+'use client'
+import { Phone, Mail } from 'lucide-react'
+import { useLanguage } from '@/lib/LanguageContext'
 
 export default function DemoCTA() {
+  const { t } = useLanguage()
+
   return (
     <section id="contact" className="py-20 px-6 bg-white">
       <div className="max-w-3xl mx-auto text-center">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3">
-          Get in touch
+          {t.contact.label}
         </p>
         <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
-          Start with a conversation.
+          {t.contact.headline}
         </h2>
         <p className="text-lg text-slate-500 max-w-xl mx-auto mb-12 leading-relaxed">
-          We&apos;re running a pilot with Luxembourg restaurants. If you&apos;d like an intelligence
-          report for your restaurant, or want to discuss an institutional partnership,
-          reach out directly. No form, no wait.
+          {t.contact.body}
         </p>
 
         <div className="grid sm:grid-cols-2 gap-5 max-w-sm mx-auto sm:max-w-md">
@@ -26,7 +28,7 @@ export default function DemoCTA() {
             </div>
             <div>
               <div className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
-                Call
+                {t.contact.callLabel}
               </div>
               <div className="text-base font-semibold text-slate-900">+352 691 189 912</div>
             </div>
@@ -41,15 +43,15 @@ export default function DemoCTA() {
             </div>
             <div>
               <div className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
-                Email
+                {t.contact.emailLabel}
               </div>
               <div className="text-base font-semibold text-slate-900">sameerbh08@gmail.com</div>
             </div>
           </a>
         </div>
 
-        <p className="mt-10 text-xs text-slate-400">Typically respond within 24 hours.</p>
+        <p className="mt-10 text-xs text-slate-400">{t.contact.footerNote}</p>
       </div>
     </section>
-  );
+  )
 }

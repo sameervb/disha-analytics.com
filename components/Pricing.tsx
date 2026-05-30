@@ -1,76 +1,61 @@
-"use client";
-import { useState } from "react";
-import { Check } from "lucide-react";
-
-const tiers = [
-  {
-    name: "Starter",
-    price: "79",
-    description: "For owners who want a monthly pulse on their business.",
-    features: [
-      "Monthly intelligence report",
-      "4 competitor benchmarks",
-      "PDF download",
-      "Email delivery",
-    ],
-    recommended: false,
-  },
-  {
-    name: "Growth",
-    price: "129",
-    description: "For owners actively working to improve margins and positioning.",
-    features: [
-      "Weekly refresh",
-      "Menu pricing alerts",
-      "Action priority list",
-      "8 competitors tracked",
-      "Owner walkthrough mode",
-    ],
-    recommended: true,
-  },
-  {
-    name: "Multi-Location",
-    price: "199",
-    description: "For groups managing up to 3 locations from one dashboard.",
-    features: [
-      "Up to 3 locations",
-      "Cross-location comparison",
-      "Market share analysis",
-      "POS data integration",
-    ],
-    recommended: false,
-  },
-];
+'use client'
+import { useState } from 'react'
+import { Check } from 'lucide-react'
+import { useLanguage } from '@/lib/LanguageContext'
 
 export default function Pricing() {
-  const [selected, setSelected] = useState(1);
+  const { t } = useLanguage()
+  const [selected, setSelected] = useState(1)
+
+  const tiers = [
+    {
+      name: t.pricing.tier1name,
+      price: t.pricing.tier1price,
+      description: t.pricing.tier1desc,
+      features: [t.pricing.tier1f1, t.pricing.tier1f2, t.pricing.tier1f3, t.pricing.tier1f4],
+      recommended: false,
+    },
+    {
+      name: t.pricing.tier2name,
+      price: t.pricing.tier2price,
+      description: t.pricing.tier2desc,
+      features: [t.pricing.tier2f1, t.pricing.tier2f2, t.pricing.tier2f3, t.pricing.tier2f4, t.pricing.tier2f5],
+      recommended: true,
+    },
+    {
+      name: t.pricing.tier3name,
+      price: t.pricing.tier3price,
+      description: t.pricing.tier3desc,
+      features: [t.pricing.tier3f1, t.pricing.tier3f2, t.pricing.tier3f3, t.pricing.tier3f4],
+      recommended: false,
+    },
+  ]
 
   return (
     <section id="pricing" className="py-20 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <div className="mb-14">
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3">
-            Pricing
+            {t.pricing.label}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
-            Pays for itself in month one.
+            {t.pricing.headline}
           </h2>
-          <p className="text-lg text-slate-500 max-w-xl leading-relaxed">
-            Pilot findings suggest €1,000-2,000 in recoverable margin identified from a single
-            report. The Growth plan costs €129 a month.
+          <p className="text-lg text-slate-500 max-w-2xl leading-relaxed">
+            {t.pricing.subheadline}
           </p>
         </div>
 
+        {/* Software subscription tiers */}
         <div className="grid md:grid-cols-3 gap-6 mb-10 items-start">
           {tiers.map((tier, i) => {
-            const isSelected = selected === i;
+            const isSelected = selected === i
             return (
               <div key={tier.name} className="relative pt-3">
-                {/* Recommended badge */}
                 {tier.recommended && (
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 z-10">
                     <span className="inline-flex items-center px-3 py-1 rounded-full bg-accent text-white text-xs font-bold tracking-wide shadow-sm">
-                      Recommended
+                      {t.pricing.recommended}
                     </span>
                   </div>
                 )}
@@ -79,8 +64,8 @@ export default function Pricing() {
                   onClick={() => setSelected(i)}
                   className={`rounded-2xl border p-7 flex flex-col cursor-pointer transition-all duration-200 h-full ${
                     isSelected
-                      ? "border-accent bg-accent/5 shadow-lg shadow-accent/10"
-                      : "border-slate-100 bg-white hover:border-slate-200"
+                      ? 'border-accent bg-accent/5 shadow-lg shadow-accent/10'
+                      : 'border-slate-100 bg-white hover:border-slate-200'
                   }`}
                 >
                   <div className="mb-5">
@@ -88,7 +73,7 @@ export default function Pricing() {
                     <div className="flex items-baseline gap-0.5">
                       <span className="text-sm font-semibold text-slate-500">€</span>
                       <span className="text-4xl font-bold text-slate-900 tabular-nums">{tier.price}</span>
-                      <span className="text-sm text-slate-400 ml-1">/mo</span>
+                      <span className="text-sm text-slate-400 ml-1">{t.pricing.perMonth}</span>
                     </div>
                     <p className="text-sm text-slate-500 mt-2.5 leading-relaxed">{tier.description}</p>
                   </div>
@@ -99,7 +84,7 @@ export default function Pricing() {
                         <Check
                           size={15}
                           strokeWidth={2.5}
-                          className={`flex-shrink-0 mt-0.5 ${isSelected ? "text-accent" : "text-slate-300"}`}
+                          className={`flex-shrink-0 mt-0.5 ${isSelected ? 'text-accent' : 'text-slate-300'}`}
                         />
                         {f}
                       </li>
@@ -111,38 +96,43 @@ export default function Pricing() {
                     onClick={(e) => e.stopPropagation()}
                     className={`block text-center px-4 py-2.5 rounded-xl font-semibold text-sm transition-colors ${
                       isSelected
-                        ? "bg-accent text-white hover:bg-accent-dark"
-                        : "border border-slate-200 text-slate-600 hover:bg-slate-50"
+                        ? 'bg-accent text-white hover:bg-accent-dark'
+                        : 'border border-slate-200 text-slate-600 hover:bg-slate-50'
                     }`}
                   >
-                    Get started
+                    {t.pricing.getStarted}
                   </a>
                 </div>
               </div>
-            );
+            )
           })}
         </div>
 
-        {/* Grant note */}
-        <div className="rounded-2xl bg-emerald-50 border border-emerald-100 p-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-          <div className="flex-1">
-            <div className="text-sm font-semibold text-emerald-800 mb-1">
-              Grant-eligible implementation packages
+        {/* White-Glove Implementation — visually distinct block */}
+        <div className="rounded-2xl bg-slate-900 border border-slate-800 p-8">
+          <div className="flex flex-col md:flex-row gap-8 md:items-center">
+            <div className="flex-1">
+              <div className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">
+                White-glove implementation
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">
+                {t.pricing.grantHeadline}
+              </h3>
+              <p className="text-sm text-slate-400 leading-relaxed">
+                {t.pricing.grantBody}
+              </p>
             </div>
-            <p className="text-sm text-emerald-700 leading-relaxed">
-              Standard (€2,999) and Full Intelligence (€4,999) packages qualify for
-              70-100% Luxembourg SMB digitalisation grants. Most owners pay
-              under €1,500 out of pocket.
-            </p>
+            <div className="flex-shrink-0">
+              <a
+                href="#contact"
+                className="inline-flex px-5 py-3 rounded-xl bg-white text-slate-900 text-sm font-semibold hover:bg-slate-100 transition-colors"
+              >
+                {t.pricing.grantCta}
+              </a>
+            </div>
           </div>
-          <a
-            href="#contact"
-            className="flex-shrink-0 px-4 py-2.5 rounded-xl bg-emerald-700 text-white text-sm font-semibold hover:bg-emerald-800 transition-colors"
-          >
-            Ask about grants
-          </a>
         </div>
       </div>
     </section>
-  );
+  )
 }
