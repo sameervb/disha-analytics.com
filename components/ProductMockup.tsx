@@ -101,10 +101,6 @@ export default function ProductMockup() {
             Owner walkthrough
           </span>
         </button>
-        <div className="ml-auto flex items-center gap-2 px-4">
-          <ShieldCheck size={12} strokeWidth={2} className="text-emerald-500" />
-          <span className="text-[10px] text-slate-400 hidden sm:block">4 validated · 3 inferred · 1 hypothesis</span>
-        </div>
       </div>
 
       {/* Internal report view */}
